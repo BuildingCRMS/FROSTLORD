@@ -8,20 +8,24 @@
 
 ## Step 1: Deploy Backend First
 
-### Option A: Railway (Recommended)
+### Railway Backend Deployment
 1. Go to [railway.app](https://railway.app)
 2. Create new project from GitHub
-3. Select your backend directory
+3. Set root directory to `backend`
 4. Add environment variables:
    ```
    DATABASE_URL=your_postgres_url
    REDIS_URL=your_redis_url
    JWT_SECRET=your_jwt_secret
    COOKIE_SECRET=your_cookie_secret
+   NODE_ENV=production
    ```
-5. Deploy and get your backend URL
+5. Add PostgreSQL and Redis services in Railway
+6. Deploy and get your backend URL
+7. Run migrations: `npm run migrate` in Railway shell
+8. Create admin user: `npx medusa user -e admin@frostlord.com -p yourpassword`
 
-### Option B: Render
+### Alternative: Render
 1. Go to [render.com](https://render.com)
 2. Create new Web Service
 3. Connect your repository

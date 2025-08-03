@@ -8,7 +8,8 @@
     "build": "medusa build",
     "start": "medusa start",
     "migrate": "medusa db:migrate",
-    "seed": "medusa seed"
+    "seed": "medusa seed",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@medusajs/framework": "^2.8.8",

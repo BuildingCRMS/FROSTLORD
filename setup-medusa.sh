@@ -1,41 +1,48 @@
 #!/bin/bash
 
-echo "🚀 Starting FROSTLORD Medusa Setup..."
+echo "🚀 Starting FROSTLORD Medusa Setup for Railway Deployment..."
 
-# Stop any existing containers
-echo "📦 Stopping existing containers..."
-docker compose down
-
-# Start database and Redis
-echo "🗃️  Starting database and Redis..."
-docker compose up postgres redis -d
-
-# Wait for database to be ready
-echo "⏳ Waiting for database to be ready..."
-sleep 10
-
-# Build the Medusa image
-echo "🔨 Building Medusa backend..."
-docker compose build medusa
-
-# Run migrations using Docker
-echo "🔄 Running database migrations..."
-docker compose run --rm medusa npm run migrate
-
-# Seed the database
-echo "🌱 Seeding database..."
-docker compose run --rm medusa npm run seed
-
-# Start all services
-echo "🌟 Starting all services..."
-docker compose up -d
-
-echo "✅ Setup complete!"
+echo "📋 Prerequisites:"
+echo "   • Railway account (https://railway.app)"
+echo "   • PostgreSQL database (Railway or external)"
+echo "   • Redis instance (Railway or external)"
 echo ""
-echo "🌐 Services:"
-echo "   • Medusa Backend: http://localhost:9000"
-echo "   • Medusa Admin: http://localhost:9000/app"
-echo "   • Frontend: Run 'npm run dev' in a new terminal"
+
+echo "🔧 Local Development Setup:"
+echo "1. Install dependencies:"
+echo "   npm install"
+echo "   cd backend && npm install"
 echo ""
-echo "📝 To check logs: docker compose logs -f"
-echo "📝 To stop: docker compose down"
+
+echo "2. Configure environment variables:"
+echo "   • Copy .env.example to .env"
+echo "   • Update DATABASE_URL, REDIS_URL, JWT_SECRET, COOKIE_SECRET"
+echo ""
+
+echo "3. Run database migrations:"
+echo "   npm run backend:migrate"
+echo ""
+
+echo "4. Seed the database:"
+echo "   npm run backend:seed"
+echo ""
+
+echo "5. Start development servers:"
+echo "   Backend: npm run backend:dev"
+echo "   Frontend: npm run dev (in another terminal)"
+echo ""
+
+echo "🚀 Railway Deployment:"
+echo "1. Push your code to GitHub"
+echo "2. Connect your repository to Railway"
+echo "3. Add environment variables in Railway dashboard"
+echo "4. Deploy!"
+echo ""
+
+echo "📚 Available Scripts:"
+echo "   npm run backend:dev      - Start Medusa backend"
+echo "   npm run backend:build    - Build backend for production"
+echo "   npm run backend:start    - Start backend in production mode"
+echo "   npm run backend:migrate  - Run database migrations"
+echo "   npm run backend:seed     - Seed database"
+echo "   npm run dev              - Start Next.js frontend"

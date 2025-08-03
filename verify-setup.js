@@ -80,4 +80,5 @@ console.log('   npm run backend:dev      - Start Medusa backend');
 console.log('   npm run backend:migrate  - Run database migrations');
 console.log('   npm run backend:seed     - Seed database');
 console.log('   npm run dev              - Start Next.js frontend');
-console.log('   npm run docker:up        - Start with Docker');
+console.log('   npm run backend:build    - Build backend for production');
+console.log('   npm run backend:start    - Start backend in production mode');

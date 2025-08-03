@@ -1,222 +1,182 @@
-<h1 align="center">
-  <a href="https://solace-medusa-starter.vercel.app/de"><img width="300" alt="Solace Logo" src="https://github.com/user-attachments/assets/d53d1a00-f94a-4ff5-ad05-892ed86d8d9d"></a>
-  <br>
-  <br>
-  DTC furniture eCommerce starter
-  <br>
-</h1>
+# 🏔️ FROSTLORD - Modern E-commerce Platform
 
-<p align="center">Solace is a sleek and modern DTC furniture eCommerce starter built on <a href="https://medusajs.com/" target="_blank">Medusa 2.0</a> and <a href="https://nextjs.org/docs" target="_blank">Next.js 14</a>. It offers a complete suite for launching an online store, including a product grid with filtering, user profiles, order history, multi-step checkout with Stripe integration, product search, and customizable product pages. Integrated with <a href="https://github.com/strapi/strapi" target="_blank">Strapi CMS</a>, it offers pre-built content models for easy website editing.</p>
+A modern e-commerce platform built with **Medusa** (backend) and **Next.js** (frontend), deployed on **Railway** and **Vercel**.
 
-&nbsp;
+## 🚀 Quick Start
 
-<p align="center">
-  <video src="https://github.com/user-attachments/assets/4ca7743c-c922-4b4b-bc1a-2f5bec0df35b" controls="controls" muted="muted" playsinline="playsinline">
-</video>
-</p>
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Railway account (for backend)
+- Vercel account (for frontend)
 
-## Table of Contents
+### Local Development
 
-- [Prerequisites](#prerequisites)
-- [Overview](#overview)
-  - [Features](#features)
-  - [Demo](#demo)
-- [Quickstart](#quickstart)
-- [Resources](#resources)
-- [Contributors](#contributors)
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd FROSTLORD
+   ```
 
-&nbsp;
+2. **Install dependencies**
+   ```bash
+   npm install
+   cd backend && npm install
+   ```
 
-## Prerequisites
+3. **Set up environment variables**
+   ```bash
+   # Copy example files
+   cp .env.example .env
+   cp backend/.env.example backend/.env
+   
+   # Update with your values
+   # DATABASE_URL, REDIS_URL, JWT_SECRET, COOKIE_SECRET
+   ```
 
-- **MedusaJS 2.0 backend**. If this hasn't been set up yet, please use the following:
-  - Our prepared repository: <a href="https://github.com/rigby-sh/solace-medusa-starter-api">Medusa 2.0 API <img width="20" alt="GitHub Logo" src="https://github.com/user-attachments/assets/b0657cbf-bbc1-40f1-99a7-8d60da97abac"></a>
-  - [Medusa 2.0 Documentation](https://docs.medusajs.com/v2)
-    > **Important**: If you're not using our prepared API repository, remember to:
-    >
-    > - Copy the folder from [Repo Link](https://github.com/rigby-sh/solace-medusa-starter-api/tree/main/src/api/store) and paste it to your API project
-    > - Copy the Middlewares file from [Repo Link](https://github.com/rigby-sh/solace-medusa-starter-api/tree/main/src/api) and paste it to your API project
-    >
-    > These files are required for the search engine and filter logic to work properly. Without them, the search and filtering functionality will not be available.
-- **A CMS management system like Strapi**. If this hasn't been set up yet, please use the following:
-  - Our prepared repository: <a href="https://github.com/rigby-sh/solace-medusa-starter-strapi">Strapi <img width="20" alt="GitHub Logo" src="https://github.com/user-attachments/assets/b0657cbf-bbc1-40f1-99a7-8d60da97abac"></a>
-  - [Strapi Documentation](https://docs.strapi.io/dev-docs/intro)
-    > **Important**: After setting up Strapi, configure the revalidation webhook:
-    >
-    > 1. Set `STRAPI_WEBHOOK_REVALIDATION_SECRET` in your Next.js `.env` (you can generate a secure value using `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
-    > 2. In Strapi admin panel: Settings → Webhooks → Create new webhook
-    > 3. Configure webhook:
-    >    - URL: `{your-frontend-url}/api/strapi-revalidate?secret={YOUR-STRAPI_WEBHOOK_REVALIDATION_SECRET}`  
-    >      Example: `http://localhost:8000/api/strapi-revalidate?secret=30747ea915627411fa275b9e3e6cafd199f9c5b221696b644509c02510ebe979`
-    >    - No additional headers needed
-    >    - Enable Entry and Media events (Create, Update, Delete)
+4. **Start development servers**
+   ```bash
+   # Terminal 1: Backend
+   npm run backend:dev
+   
+   # Terminal 2: Frontend
+   npm run dev
+   ```
 
-&nbsp;
+## 🚂 Railway Deployment (Backend)
 
-## Overview
+Your backend is configured for Railway deployment:
 
-#### Features
+1. **Push to GitHub**
+2. **Connect to Railway**: [railway.app](https://railway.app)
+3. **Set root directory**: `backend`
+4. **Add environment variables** (see RAILWAY_DEPLOYMENT.md)
+5. **Deploy!**
 
-The storefront has been designed to meet all the requirements of modern e-commerce stores.
+### Railway Configuration
+- ✅ Automatic builds and deployments
+- ✅ Built-in PostgreSQL and Redis
+- ✅ Health checks and monitoring
+- ✅ SSL/HTTPS included
 
-- **Full user profile functionality**
-  - Order history
-  - Profile settings
-  - Shipping details
-  - Password resetting
-- **Shopping cart**
-  - Add/remove products
-  - Apply promotional codes
-- **Checkout**
-  - A complete 3-step checkout process
-  - Payment support via Stripe
-  - Mail notifications after order placement
-- **About Us, Blog, Privacy Policy, and Terms and Conditions pages**
-  - Fully customizable through the CMS.
-- **Product search functionality** based on keywords.
-- **Product pages**
-- **Collections and categories**
-- **Two themes support**
-  - Dark
-  - Light
-- **Next.js 14 support**
+## 🌐 Vercel Deployment (Frontend)
 
-#### Demo
+Deploy your frontend to Vercel:
 
-#### User Profile
+1. **Connect GitHub repository**
+2. **Configure build settings**
+3. **Add environment variables**
+4. **Deploy!**
 
-![User-profile](https://github.com/user-attachments/assets/b8c4f874-c383-4d2b-8135-2e1dc4435743)
+See `VERCEL_DEPLOYMENT.md` for detailed instructions.
 
-&nbsp;
-
-#### Cart
-
-![Cart](https://github.com/user-attachments/assets/5cad2031-4ddc-4766-a6d8-5ccab873bd94)
-
-&nbsp;
-
-#### Checkout
-
-![Checkout](https://github.com/user-attachments/assets/4a655836-f13d-4906-b733-f1595153be99)
-
-&nbsp;
-
-#### Search
-
-![Search](https://github.com/user-attachments/assets/1941a053-37fa-4a8f-ae7a-96fbcb15118e)
-
-&nbsp;
-
-#### Product Page
-
-![Product page](https://github.com/user-attachments/assets/fd134d2b-6656-4fe1-aea7-25316a65a1f3)
-
-&nbsp;
-
-## Quickstart
-
-### `Clone the repository`
+## 📁 Project Structure
 
 ```
-
-git clone https://github.com/rigby-sh/solace-medusa-starter.git
-
+FROSTLORD/
+├── backend/                 # Medusa backend
+│   ├── src/
+│   │   ├── api/            # API endpoints
+│   │   ├── subscribers/    # Event subscribers
+│   │   └── workflows/      # Business workflows
+│   ├── medusa-config.js    # Medusa configuration
+│   └── railway.json        # Railway deployment config
+├── src/                    # Next.js frontend
+│   ├── app/               # App router pages
+│   ├── modules/           # Feature modules
+│   └── lib/               # Utilities and config
+├── e2e/                   # End-to-end tests
+└── preset/                # UI theme configuration
 ```
 
-### `Install packages`
+## 🛠️ Available Scripts
 
+### Development
+```bash
+npm run dev              # Start Next.js frontend
+npm run backend:dev      # Start Medusa backend
+npm run backend:build    # Build backend for production
+npm run backend:start    # Start backend in production mode
 ```
 
-npm install
-
+### Database
+```bash
+npm run backend:migrate  # Run database migrations
+npm run backend:seed     # Seed database with sample data
 ```
 
-### `Envs`
-
-Create a .env file and add environment variables listed below.
-
+### Testing
+```bash
+npm run test-e2e         # Run end-to-end tests
+npm run test:serial      # Run tests serially
 ```
 
-NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=YOUR_MEDUSA_PUBLISHABLE_KEY
-NEXT_PUBLIC_MEDUSA_BACKEND_URL=YOUR_MEDUSA_BACKEND_URL
-NEXT_PUBLIC_DEMO_MODE=BOOLEAN_VALUE
-NEXT_PUBLIC_STRAPI_URL=YOUR_STRAPI_URL
-NEXT_PUBLIC_STRAPI_READ_TOKEN=YOUR_STRAPI_READ_TOKEN
-NEXT_PUBLIC_CDN_SPACE_DOMAIN=YOUR_CDN_SPACE_DOMAIN
-NEXT_PUBLIC_SPACE_DOMAIN=YOUR_SPACE_DOMAIN
-NEXT_PUBLIC_SPACE_ENDPOINT=YOUR_SPACE_ENDPOINT
-STRAPI_WEBHOOK_REVALIDATION_SECRET=YOUR_STRAPI_WEBHOOK_REVALIDATION_SECRET
+## 🔧 Configuration
 
+### Environment Variables
+
+**Backend (.env)**
+```env
+DATABASE_URL=postgres://user:password@host:port/database
+REDIS_URL=redis://user:password@host:port
+JWT_SECRET=your_jwt_secret
+COOKIE_SECRET=your_cookie_secret
+NODE_ENV=production
 ```
 
-### `Develop`
-
-Start your application with autoReload enabled
-
+**Frontend (.env)**
+```env
+NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://your-backend.railway.app
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_your_key
+NEXT_PUBLIC_SITE_URL=https://your-frontend.vercel.app
 ```
 
-npm run dev
+## 📚 Documentation
 
+- [Railway Deployment Guide](RAILWAY_DEPLOYMENT.md)
+- [Vercel Deployment Guide](VERCEL_DEPLOYMENT.md)
+- [Medusa Documentation](https://docs.medusajs.com)
+- [Next.js Documentation](https://nextjs.org/docs)
+
+## 🧪 Testing
+
+Run the test suite:
+```bash
+npm run test-e2e
 ```
 
-### `Build`
+## 🚀 Production Deployment
 
-Build the project to generate the production version preview
+1. **Backend**: Deploy to Railway
+2. **Frontend**: Deploy to Vercel
+3. **Database**: Use Railway PostgreSQL
+4. **Cache**: Use Railway Redis
+5. **CDN**: Vercel's global CDN
 
-```
+## 💰 Cost Optimization
 
-npm run build
+- **Railway**: ~$5/month (backend + database + Redis)
+- **Vercel**: Free tier for frontend
+- **Total**: ~$5/month for full production setup
 
-```
+## 🤝 Contributing
 
-### `Start`
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
 
-Run the preview version of the project
+## 📄 License
 
-```
+MIT License - see LICENSE file for details.
 
-npm run start
+## 🆘 Support
 
-```
+- [Medusa Discord](https://discord.gg/medusajs)
+- [Railway Discord](https://discord.gg/railway)
+- [Next.js Discord](https://discord.gg/nextjs)
 
-&nbsp;
+---
 
-## Deploying the project with Vercel
-
-Deploying your application on Vercel is a quick and straightforward process that allows for easy management and scaling of your project. To deploy your project, click the button below to start the process. Vercel will guide you through the configuration steps and connect to your repository.
-
-[![Deploy](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/rigby-sh/solace-medusa-starter)
-
-&nbsp;
-
-## Resources
-
-#### Learn more about Medusa
-
-- [Website](https://www.medusajs.com/)
-- [GitHub](https://github.com/medusajs)
-- [Medusa 2.0 Documentation](https://docs.medusajs.com/v2)
-
-#### Learn more about Next.js
-
-- [Website](https://nextjs.org/)
-- [GitHub](https://github.com/vercel/next.js)
-- [Documentation](https://nextjs.org/docs)
-
-#### Learn more about Strapi
-
-- [Website](https://strapi.io/)
-- [GitHub](https://github.com/strapi/strapi)
-- [Documentation](https://docs.strapi.io/)
-
-&nbsp;
-
-> [!IMPORTANT] > **Image Usage Disclaimer**: The images used in this starter are for preview purposes only. They are licensed exclusively for use within this demo and cannot be used in any commercial applications or redistributed. If you intend to use this starter for your own store, please replace all images with assets that are appropriately licensed for your project.
-
-&nbsp;
-
-## Contributors
-
-<a href = "https://github.com/rigby-sh/solace-medusa-starter/network/dependencies">
-  <img src = "https://contrib.rocks/image?repo=rigby-sh/solace-medusa-starter"/>
-</a>
+Built with ❤️ using [Medusa](https://medusajs.com) and [Next.js](https://nextjs.org)
