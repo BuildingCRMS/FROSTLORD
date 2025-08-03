@@ -1,0 +1,57 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: frostlord_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: frostlord_store
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_frostlord:/var/lib/postgresql/data
+    networks:
+      - frostlord_network
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: frostlord_redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    networks:
+      - frostlord_network
+
+  # Medusa Server
+  # This service runs the Medusa backend application
+  # and the admin dashboard.
+  medusa:
+    build: .
+    container_name: frostlord_backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "9000:9000"
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=postgres://postgres:postgres@postgres:5432/frostlord_store
+      - REDIS_URL=redis://redis:6379
+    env_file:
+      - .env
+    volumes:
+      - .:/server
+      - /server/node_modules
+    networks:
+      - frostlord_network
+
+volumes:
+  postgres_data_frostlord:
+
+networks:
+  frostlord_network:
+    driver: bridge

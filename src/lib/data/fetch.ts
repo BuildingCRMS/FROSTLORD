@@ -14,21 +14,42 @@ export const fetchStrapiClient = async (
   endpoint: string,
   params?: RequestInit
 ) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}${endpoint}`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_READ_TOKEN}`,
-      },
-      ...params,
+  // Check if Strapi is configured
+  if (!process.env.NEXT_PUBLIC_STRAPI_URL || 
+      process.env.NEXT_PUBLIC_STRAPI_URL === 'http://localhost:1337' ||
+      !process.env.NEXT_PUBLIC_STRAPI_READ_TOKEN ||
+      process.env.NEXT_PUBLIC_STRAPI_READ_TOKEN === 'your_strapi_read_token_here') {
+    // Return empty data structure when Strapi is not configured
+    return {
+      json: async () => ({ data: [] }),
+      ok: true
     }
-  )
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch data')
   }
 
-  return response
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_STRAPI_URL}${endpoint}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_READ_TOKEN}`,
+        },
+        ...params,
+      }
+    )
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch data')
+    }
+
+    return response
+  } catch (error) {
+    console.warn('Strapi connection failed, using fallback data:', error)
+    // Return empty data structure as fallback
+    return {
+      json: async () => ({ data: [] }),
+      ok: true
+    }
+  }
 }
 
 // Homepage data

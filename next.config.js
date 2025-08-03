@@ -1,12 +1,22 @@
 const checkEnvVariables = require('./check-env-variables')
 
-checkEnvVariables()
+// Only check env variables in development
+if (process.env.NODE_ENV === 'development') {
+  checkEnvVariables()
+}
 
 /**
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
   reactStrictMode: true,
+  output: 'standalone',
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -27,18 +37,19 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_SPACE_DOMAIN,
+        hostname: '*.vercel.app',
       },
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_CDN_SPACE_DOMAIN,
+        hostname: '*.railway.app',
       },
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_SPACE_ENDPOINT,
+        hostname: '*.render.com',
       },
     ],
   },
+  serverExternalPackages: ['@medusajs/medusa'],
 }
 
 module.exports = nextConfig

@@ -15,6 +15,11 @@ interface CategoryPageLayoutProps {
 }
 
 export async function generateStaticParams() {
+  // Skip static generation during build time if no backend URL
+  if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+    return []
+  }
+
   const product_categories = await listCategories()
 
   if (!product_categories) {
@@ -38,7 +43,7 @@ export async function generateStaticParams() {
     )
     .flat()
 
-  return staticParams
+  return staticParams || []
 }
 
 export async function generateMetadata(

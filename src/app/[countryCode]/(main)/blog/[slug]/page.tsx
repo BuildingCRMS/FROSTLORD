@@ -6,6 +6,11 @@ import { StoreRegion } from '@medusajs/types'
 import BlogPostTemplate from '@modules/blog/templates/blogPostTemplate'
 
 export async function generateStaticParams() {
+  // Skip static generation during build time if no backend URL
+  if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+    return []
+  }
+
   const slugs = await getAllBlogSlugs()
 
   if (!slugs) {
@@ -21,7 +26,7 @@ export async function generateStaticParams() {
       slug,
       countryCode,
     }))
-  )
+  ) || []
 }
 
 export async function generateMetadata(props) {

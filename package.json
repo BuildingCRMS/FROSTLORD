@@ -14,7 +14,17 @@
     "format": "prettier --check .",
     "analyze": "ANALYZE=true next build",
     "test-e2e": "playwright test e2e",
-    "test:serial": "playwright test --workers=1"
+    "test:serial": "playwright test --workers=1",
+    "docker:up": "docker compose up --build -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:build": "cd backend && npm run build",
+    "backend:start": "cd backend && npm run start",
+    "backend:migrate": "cd backend && npm run migrate",
+    "backend:seed": "cd backend && npm run seed",
+    "vercel-build": "next build",
+    "vercel-dev": "next dev"
   },
   "resolutions": {
     "webpack": "5",

@@ -5,6 +5,11 @@ import medusaError from '@lib/util/medusa-error'
 import { HttpTypes } from '@medusajs/types'
 
 export const listRegions = cache(async function () {
+  // Skip data fetching during build time
+  if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+    return []
+  }
+  
   return sdk.store.region
     .list({}, { next: { tags: ['regions'] } })
     .then(({ regions }) => regions)
@@ -22,6 +27,11 @@ const regionMap = new Map<string, HttpTypes.StoreRegion>()
 
 export const getRegion = cache(async function (countryCode: string) {
   try {
+    // Skip data fetching during build time
+    if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+      return null
+    }
+    
     if (regionMap.has(countryCode)) {
       return regionMap.get(countryCode)
     }

@@ -59,6 +59,14 @@ export const getProductsList = async function ({
 }> {
   noStore()
 
+  // Skip data fetching during build time
+  if (process.env.NODE_ENV === 'production' && !process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL) {
+    return {
+      response: { products: [], count: 0 },
+      nextPage: null,
+    }
+  }
+
   const limit = queryParams?.limit || 12
   const offset = Math.max(0, (pageParam - 1) * limit)
   const region = await getRegion(countryCode)
