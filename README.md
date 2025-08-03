@@ -127,7 +127,7 @@ NODE_ENV=production
 **Frontend (.env)**
 ```env
 NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://your-backend.railway.app
-NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_your_key
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_37291f8962359377af93619eb1b750c5c036ecd10f92f4d990694fbd1604fa10
 NEXT_PUBLIC_SITE_URL=https://your-frontend.vercel.app
 ```
 

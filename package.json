@@ -20,6 +20,8 @@
     "backend:start": "cd backend && npm run start",
     "backend:migrate": "cd backend && npm run migrate",
     "backend:seed": "cd backend && npm run seed",
+    "backend:create-key": "cd backend && node create-publishable-key.js",
+    "backend:setup-key": "cd backend && node setup-publishable-key.js",
     "vercel-build": "next build",
     "vercel-dev": "next dev"
   },

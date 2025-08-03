@@ -118,7 +118,7 @@ Update your frontend environment variables:
 
 ```env
 NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://your-app.railway.app
-NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_your_publishable_key
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_37291f8962359377af93619eb1b750c5c036ecd10f92f4d990694fbd1604fa10
 NEXT_PUBLIC_SITE_URL=https://your-frontend-domain.com
 ```
 

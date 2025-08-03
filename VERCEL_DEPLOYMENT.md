@@ -38,7 +38,7 @@ In your Vercel project settings, add these environment variables:
 
 ```
 NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://your-backend-url.railway.app
-NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_fdaa306ac2dfc3b7de0415c2bf1cfbda25ffe7ca697a5ea5fcf12934b163b602
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_37291f8962359377af93619eb1b750c5c036ecd10f92f4d990694fbd1604fa10
 NEXT_PUBLIC_SITE_URL=https://your-vercel-domain.vercel.app
 ```
 
@@ -91,7 +91,7 @@ vercel --prod
 ### Frontend (Vercel)
 ```
 NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://your-backend-url.railway.app
-NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_your_publishable_key
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_37291f8962359377af93619eb1b750c5c036ecd10f92f4d990694fbd1604fa10
 NEXT_PUBLIC_SITE_URL=https://your-vercel-domain.vercel.app
 ```
 
