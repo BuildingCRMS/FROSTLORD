@@ -1,182 +1,137 @@
-# 🏔️ FROSTLORD - Modern E-commerce Platform
+# FROSTLORD
 
-A modern e-commerce platform built with **Medusa** (backend) and **Next.js** (frontend), deployed on **Railway** and **Vercel**.
+A modern ecommerce platform built with Medusa.js backend and Next.js frontend.
 
-## 🚀 Quick Start
+## Project Structure
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Railway account (for backend)
-- Vercel account (for frontend)
-
-### Local Development
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd FROSTLORD
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   cd backend && npm install
-   ```
-
-3. **Set up environment variables**
-   ```bash
-   # Copy example files
-   cp .env.example .env
-   cp backend/.env.example backend/.env
-   
-   # Update with your values
-   # DATABASE_URL, REDIS_URL, JWT_SECRET, COOKIE_SECRET
-   ```
-
-4. **Start development servers**
-   ```bash
-   # Terminal 1: Backend
-   npm run backend:dev
-   
-   # Terminal 2: Frontend
-   npm run dev
-   ```
-
-## 🚂 Railway Deployment (Backend)
-
-Your backend is configured for Railway deployment:
-
-1. **Push to GitHub**
-2. **Connect to Railway**: [railway.app](https://railway.app)
-3. **Set root directory**: `backend`
-4. **Add environment variables** (see RAILWAY_DEPLOYMENT.md)
-5. **Deploy!**
-
-### Railway Configuration
-- ✅ Automatic builds and deployments
-- ✅ Built-in PostgreSQL and Redis
-- ✅ Health checks and monitoring
-- ✅ SSL/HTTPS included
-
-## 🌐 Vercel Deployment (Frontend)
-
-Deploy your frontend to Vercel:
-
-1. **Connect GitHub repository**
-2. **Configure build settings**
-3. **Add environment variables**
-4. **Deploy!**
-
-See `VERCEL_DEPLOYMENT.md` for detailed instructions.
-
-## 📁 Project Structure
+This project is organized as a monorepo with separate frontend and backend:
 
 ```
-FROSTLORD/
-├── backend/                 # Medusa backend
-│   ├── src/
-│   │   ├── api/            # API endpoints
-│   │   ├── subscribers/    # Event subscribers
-│   │   └── workflows/      # Business workflows
-│   ├── medusa-config.js    # Medusa configuration
-│   └── railway.json        # Railway deployment config
-├── src/                    # Next.js frontend
-│   ├── app/               # App router pages
-│   ├── modules/           # Feature modules
-│   └── lib/               # Utilities and config
-├── e2e/                   # End-to-end tests
-└── preset/                # UI theme configuration
+frostlord/
+├── backend/          # Medusa.js backend server
+├── storefront/       # Next.js frontend application
+├── package.json      # Root package.json for managing both projects
+└── README.md         # This file
 ```
 
-## 🛠️ Available Scripts
+## Prerequisites
 
-### Development
+- Node.js 18.x or higher
+- npm 8.x or higher
+- PostgreSQL database
+- Redis (for Medusa workflows)
+
+## Quick Start
+
+### 1. Install Dependencies
+
 ```bash
-npm run dev              # Start Next.js frontend
-npm run backend:dev      # Start Medusa backend
-npm run backend:build    # Build backend for production
-npm run backend:start    # Start backend in production mode
+# Install root dependencies
+npm install
+
+# Install backend dependencies
+cd backend && npm install
+
+# Install frontend dependencies
+cd ../storefront && npm install
+
+# Or use the convenience script
+npm run install:all
 ```
 
-### Database
+### 2. Environment Setup
+
+#### Backend (.env in backend/ directory)
 ```bash
-npm run backend:migrate  # Run database migrations
-npm run backend:seed     # Seed database with sample data
+DATABASE_URL=postgres://username:password@localhost:5432/frostlord
+REDIS_URL=redis://localhost:6379
+JWT_SECRET=your-jwt-secret
+COOKIE_SECRET=your-cookie-secret
+STRIPE_SECRET_KEY=your-stripe-secret-key
+STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
 ```
 
-### Testing
+#### Frontend (.env.local in storefront/ directory)
 ```bash
-npm run test-e2e         # Run end-to-end tests
-npm run test:serial      # Run tests serially
+NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://localhost:9000
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
 ```
 
-## 🔧 Configuration
+### 3. Database Setup
+
+```bash
+cd backend
+npm run seed
+```
+
+### 4. Start Development Servers
+
+```bash
+# Start both backend and frontend
+npm run dev
+
+# Or start them separately
+npm run dev:backend    # Backend on port 9000
+npm run dev:frontend   # Frontend on port 8000
+```
+
+## Available Scripts
+
+### Root Level
+- `npm run dev` - Start both backend and frontend in development mode
+- `npm run build` - Build both projects
+- `npm run start` - Start both projects in production mode
+- `npm run install:all` - Install dependencies for all projects
+- `npm run clean` - Clean all node_modules directories
+
+### Backend
+- `npm run dev` - Start Medusa development server
+- `npm run build` - Build Medusa backend
+- `npm run seed` - Seed database with sample data
+- `npm run start` - Start production server
+
+### Frontend
+- `npm run dev` - Start Next.js development server
+- `npm run build` - Build Next.js application
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+## Development
+
+### Backend Development
+The backend is built with Medusa.js 2.0 and includes:
+- Custom modules for email notifications
+- MinIO file storage integration
+- Stripe payment processing
+- MeiliSearch integration
+- Custom API endpoints
+
+### Frontend Development
+The frontend is built with Next.js 15 and includes:
+- Modern UI components with Radix UI
+- Tailwind CSS for styling
+- MDX support for content
+- Responsive design
+- Ecommerce features (cart, checkout, etc.)
+
+## Deployment
+
+### Railway Deployment
+Both backend and frontend are configured for Railway deployment:
+- Backend: Uses `railway.json` configuration
+- Frontend: Configured for Next.js deployment
 
 ### Environment Variables
+Make sure to set all required environment variables in your deployment platform.
 
-**Backend (.env)**
-```env
-DATABASE_URL=postgres://user:password@host:port/database
-REDIS_URL=redis://user:password@host:port
-JWT_SECRET=your_jwt_secret
-COOKIE_SECRET=your_cookie_secret
-NODE_ENV=production
-```
-
-**Frontend (.env)**
-```env
-NEXT_PUBLIC_MEDUSA_BACKEND_URL=https://your-backend.railway.app
-NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_37291f8962359377af93619eb1b750c5c036ecd10f92f4d990694fbd1604fa10
-NEXT_PUBLIC_SITE_URL=https://your-frontend.vercel.app
-```
-
-## 📚 Documentation
-
-- [Railway Deployment Guide](RAILWAY_DEPLOYMENT.md)
-- [Vercel Deployment Guide](VERCEL_DEPLOYMENT.md)
-- [Medusa Documentation](https://docs.medusajs.com)
-- [Next.js Documentation](https://nextjs.org/docs)
-
-## 🧪 Testing
-
-Run the test suite:
-```bash
-npm run test-e2e
-```
-
-## 🚀 Production Deployment
-
-1. **Backend**: Deploy to Railway
-2. **Frontend**: Deploy to Vercel
-3. **Database**: Use Railway PostgreSQL
-4. **Cache**: Use Railway Redis
-5. **CDN**: Vercel's global CDN
-
-## 💰 Cost Optimization
-
-- **Railway**: ~$5/month (backend + database + Redis)
-- **Vercel**: Free tier for frontend
-- **Total**: ~$5/month for full production setup
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests
+4. Test thoroughly
 5. Submit a pull request
 
-## 📄 License
+## License
 
-MIT License - see LICENSE file for details.
-
-## 🆘 Support
-
-- [Medusa Discord](https://discord.gg/medusajs)
-- [Railway Discord](https://discord.gg/railway)
-- [Next.js Discord](https://discord.gg/nextjs)
-
----
-
-Built with ❤️ using [Medusa](https://medusajs.com) and [Next.js](https://nextjs.org)
+This project is licensed under the MIT License - see the LICENSE file for details.
