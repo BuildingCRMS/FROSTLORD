@@ -1,4 +1,19 @@
-# Ignore everything except backend
-*
-!backend/
-!backend/** 
+# Ignore frontend files
+../storefront/
+../node_modules/
+../package.json
+../package-lock.json
+
+# Ignore git and other files
+../.git/
+../.github/
+../README.md
+../LICENSE
+../.gitignore
+../railway.toml
+
+# Ignore development files
+*.log
+.env.local
+.env.development
+.env.test 

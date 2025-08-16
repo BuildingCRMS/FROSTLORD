@@ -11,3 +11,6 @@ numReplicas = 1
 
 [build.context]
 path = "backend"
+
+[build.environment]
+NIXPACKS_PKG_MANAGER = "npm"
